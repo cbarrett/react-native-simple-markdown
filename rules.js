@@ -158,11 +158,14 @@ export default (styles) => ({
   },
   table: {
     react: (node, output, state) => {
+      const oldWithinText = state.withinText
+      state.withinText = true
       const headers = _.map(node.header, (content, i) => {
         return createElement(Text, {
           style: styles.tableHeaderCell
         }, output(content, state))
       })
+      state.withinText = oldWithinText
 
       const header = createElement(View, { style: styles.tableHeader }, headers)
 
